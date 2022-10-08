@@ -26,12 +26,8 @@ class FirstLaboratoryWorkController extends BaseController
         {
             $model->favoriteCuisine = intval(Yii::$app->request->post()["FeedbackModel"]["favoriteCuisine"]);
             $model->isRecommend = intval(Yii::$app->request->post()["FeedbackModel"]["isRecommend"]);
+        }
 
-            return $this->render('firstLaboratoryPartTwo', ['feedbackModel' => $model]);
-        }
-        else
-        {
-            return $this->render('firstLaboratoryPartTwo', ['feedbackModel' => $model]);
-        }
+        return $this->render('firstLaboratoryPartTwo', ['feedbackModel' => $model]);
     }
 }
