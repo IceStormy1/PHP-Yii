@@ -12,21 +12,17 @@ use yii\widgets\LinkPager;
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">№</th>
-            <th scope="col">Name</th>
-            <th scope="col">BirthDay</th>
-            <th scope="col">Description</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
         </tr>
         </thead>
         <tbody>
         <?php
         $countRows = $pagination->offset + 1;
-        foreach ($authors as $author) { ?>
+        foreach ($genres as $genre) { ?>
             <tr>
                 <th scope="row"><?= $countRows++ ?></th>
-                <td><?= Html::encode("{$author["Name"]}") ?></td>
-                <td><?= Html::encode("{$author["Birthday"]}") ?></td>
-                <td><?= Html::encode("{$author["Description"]}") ?></td>
+                <td><?= Html::encode("{$genre["GenreName"]}") ?></td>
             </tr>
         <?php } ?>
         </tbody>

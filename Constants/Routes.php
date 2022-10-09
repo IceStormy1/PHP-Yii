@@ -27,6 +27,15 @@ class Routes
     }
 
     /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fauthors
+     * @return string
+     */
+    public static function GetGenresRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'genres';
+    }
+
+    /**
      * Return route: /web/index.php/?r=laboratory/
      * @return string
      */
