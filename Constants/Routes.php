@@ -36,6 +36,15 @@ class Routes
     }
 
     /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fauthors
+     * @return string
+     */
+    public static function GetBooksRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'books';
+    }
+
+    /**
      * Return route: /web/index.php/?r=laboratory/
      * @return string
      */
