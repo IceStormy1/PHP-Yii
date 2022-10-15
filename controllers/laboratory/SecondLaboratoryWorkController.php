@@ -2,10 +2,12 @@
 
 namespace app\controllers\laboratory;
 
+use app\constants\Routes;
 use app\controllers\BaseController;
 use app\Entities\AuthorEntity;
 use app\Entities\BooksEntity;
 use app\Entities\GenreEntity;
+use app\models\laboratory\AuthorModel;
 use app\models\laboratory\SearchAuthorModel;
 use Yii;
 use yii\data\Pagination;
@@ -137,11 +139,29 @@ class SecondLaboratoryWorkController extends BaseController
         );
     }
 
-    public function actionDeleteAuthor(): string
+    public function actionDeleteAuthor(): \yii\web\Response
     {
         $authorsQuery = AuthorEntity::deleteAll(sprintf('"Id" =\'%s\' ', $_GET['authorId']));
 
-        return $this->GetAuthorsByParameters(null);
+        return $this->redirect(Routes::GetAuthorsRoute());
+    }
+
+    public function actionSaveAuthor(): \yii\web\Response|string
+    {
+        $authorModel = new AuthorModel();
+
+        if(!$authorModel->load(Yii::$app->request->post()))
+            return $this->GetAuthorsByParameters(null);
+
+        $authorEntity = new AuthorEntity();
+
+        $authorEntity["Description"] = $authorModel->description;
+        $authorEntity["Name"] = $authorModel->name;
+        $authorEntity["Birthday"] = $authorModel->birthDay;
+
+        $authorEntity->save();
+
+        return $this->redirect(Routes::GetAuthorsRoute());
     }
 
     private function GetAuthorsByParameters(?SearchAuthorModel $searchAuthorModel): string
@@ -162,10 +182,13 @@ class SecondLaboratoryWorkController extends BaseController
             ->limit($pagination->limit)
             ->all();
 
+        $authorModel = new AuthorModel();
+
         return $this->render('secondLaboratoryAuthorsView',
             [
                 'authors' => $authorsResult,
-                'pagination' => $pagination
+                'pagination' => $pagination,
+                'authorModel' => $authorModel
             ]);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
 use app\constants\Routes;
-use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
 ?>
@@ -11,6 +11,7 @@ use yii\widgets\LinkPager;
         Лабораторная работа №2. Таблица Авторы
     </div>
 <?= Html::a( 'Вернуться', Yii::$app->request->referrer, ['class' => 'btn btn-outline-primary']); ?>
+<div class="container">
     <table class="table">
         <thead>
         <tr>
@@ -18,6 +19,7 @@ use yii\widgets\LinkPager;
             <th scope="col">Name</th>
             <th scope="col">BirthDay</th>
             <th scope="col">Description</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -32,10 +34,23 @@ use yii\widgets\LinkPager;
                <td><?= Html::a('Удалить', Routes::GetDeleteAuthorRoute($author["Id"]), ['class' => 'btn btn-danger', 'role' => 'button']) ?></td>
             </tr>
         <?php } ?>
+        <tr>
+            <th scope="row"><?= $countRows++ ?></th>
+
+            <?php $form = ActiveForm::begin(['action'=>Routes::GetSaveAuthorRoute()]); ?>
+
+            <td><?= $form->field($authorModel, 'name')->label(false) ?> </td>
+            <td> <?= $form->field($authorModel, 'birthDay')->input('date', ['data-date-format'=>'YYYY MMMM DD'])->label(false) ?></td>
+            <td> <?= $form->field($authorModel, 'description')->textarea(['rows'=>'1'])->label(false) ?></td>
+
+            <td><?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?></td>
+
+            <?php ActiveForm::end(); ?>
+        </tr>
         </tbody>
     </table>
     <p class="h6">Всего найдено записей: <?= $pagination->totalCount ?></p>
-
+</div>
 <?= LinkPager::widget(
     [
         'pagination' => $pagination,

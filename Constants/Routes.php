@@ -27,12 +27,21 @@ class Routes
     }
 
     /**
-     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fdelete-author
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fdelete-author&authorId
      * @return string
      */
     public static function GetDeleteAuthorRoute(string $authorId): string
     {
         return self::GetSecondLaboratoryRoute() . 'delete-author&authorId=' . $authorId;
+    }
+
+    /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fdelete-author&authorId
+     * @return string
+     */
+    public static function GetSaveAuthorRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'save-author';
     }
 
     /**
