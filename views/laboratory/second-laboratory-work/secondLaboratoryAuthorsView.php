@@ -1,5 +1,6 @@
 <?php
 
+use app\constants\Routes;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -28,12 +29,12 @@ use yii\widgets\LinkPager;
                 <td><?= Html::encode("{$author["Name"]}") ?></td>
                 <td><?= Html::encode("{$author["Birthday"]}") ?></td>
                 <td><?= Html::encode("{$author["Description"]}") ?></td>
-
+               <td><?= Html::a('Удалить', Routes::GetDeleteAuthorRoute($author["Id"]), ['class' => 'btn btn-danger', 'role' => 'button']) ?></td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
-
+    <p class="h6">Всего найдено записей: <?= $pagination->totalCount ?></p>
 
 <?= LinkPager::widget(
     [

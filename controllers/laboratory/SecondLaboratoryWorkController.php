@@ -137,6 +137,13 @@ class SecondLaboratoryWorkController extends BaseController
         );
     }
 
+    public function actionDeleteAuthor(): string
+    {
+        $authorsQuery = AuthorEntity::deleteAll(sprintf('"Id" =\'%s\' ', $_GET['authorId']));
+
+        return $this->GetAuthorsByParameters(null);
+    }
+
     private function GetAuthorsByParameters(?SearchAuthorModel $searchAuthorModel): string
     {
         $authorsQuery = AuthorEntity::find();
