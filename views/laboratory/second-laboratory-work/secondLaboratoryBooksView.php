@@ -7,8 +7,9 @@ use yii\widgets\LinkPager;
 ?>
 
     <div class="alert alert-success" role="alert">
-        Лабораторная работа №2. Таблица Книги
+        Лабораторная работа №2. <?=$nameView ?>
     </div>
+<?= Html::a( 'Вернуться', Yii::$app->request->referrer, ['class' => 'btn btn-outline-primary']); ?>
     <table class="table">
         <thead>
         <tr>
@@ -16,6 +17,7 @@ use yii\widgets\LinkPager;
             <th scope="col">BookName</th>
             <th scope="col">Author</th>
             <th scope="col">Genre</th>
+            <th scope="col">DateOfWriting</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +29,7 @@ use yii\widgets\LinkPager;
                 <td><?= Html::encode("{$book->BookName}") ?></td>
                 <td><?= Html::encode("{$book->authors->Name}") ?></td>
                 <td><?= Html::encode("{$book->genres->GenreName}") ?></td>
+                <td><?= Html::encode("{$book->DateOfWriting}") ?></td>
             </tr>
         <?php } ?>
         </tbody>

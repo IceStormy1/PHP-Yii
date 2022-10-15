@@ -45,6 +45,33 @@ class Routes
     }
 
     /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Ftwentieth-century
+     * @return string
+     */
+    public static function GetBooksInTwentiethCenturyRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'twentieth-century';
+    }
+
+    /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fauthors-and-total-books
+     * @return string
+     */
+    public static function GetAuthorsAndTotalBooksRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'authors-and-total-books';
+    }
+
+    /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Ffind-author
+     * @return string
+     */
+    public static function GetFindAuthorRoute(): string
+    {
+        return self::GetSecondLaboratoryRoute() . 'find-author';
+    }
+
+    /**
      * Return route: /web/index.php/?r=laboratory/
      * @return string
      */

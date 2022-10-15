@@ -9,6 +9,7 @@ use yii\widgets\LinkPager;
     <div class="alert alert-success" role="alert">
         Лабораторная работа №2. Таблица Авторы
     </div>
+<?= Html::a( 'Вернуться', Yii::$app->request->referrer, ['class' => 'btn btn-outline-primary']); ?>
     <table class="table">
         <thead>
         <tr>
