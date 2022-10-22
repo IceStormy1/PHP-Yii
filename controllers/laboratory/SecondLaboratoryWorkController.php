@@ -74,7 +74,10 @@ class SecondLaboratoryWorkController extends BaseController
 
     public function actionTwentiethCentury(): string
     {
-        $booksQuery = BooksEntity::find();
+        $booksQuery = BooksEntity::find()
+            ->innerJoinWith(strtolower(AuthorEntity::$TableName), '"AuthorId" = "Authors"."Id"')
+            ->innerJoinWith(strtolower(GenreEntity::$TableName), '"GenreId" = "Genres"."Id"')
+            ->where('"DateOfWriting" > \'1900-01-01\' and "DateOfWriting" < \'2000-01-01\'');
 
         $pagination = new Pagination(
             [
@@ -83,9 +86,6 @@ class SecondLaboratoryWorkController extends BaseController
             ]);
 
         $booksResult = $booksQuery
-            ->innerJoinWith(strtolower(AuthorEntity::$TableName), '"AuthorId" = "Authors"."Id"')
-            ->innerJoinWith(strtolower(GenreEntity::$TableName), '"GenreId" = "Genres"."Id"')
-            ->where('"DateOfWriting" > \'1900-01-01\' and "DateOfWriting" < \'2000-01-01\'')
             ->orderBy('DateOfWriting')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -139,9 +139,9 @@ class SecondLaboratoryWorkController extends BaseController
         );
     }
 
-    public function actionDeleteAuthor(): \yii\web\Response
+    public function actionDeleteAuthor(string $authorId): \yii\web\Response
     {
-        $authorsQuery = AuthorEntity::deleteAll(sprintf('"Id" =\'%s\' ', $_GET['authorId']));
+        AuthorEntity::deleteAll(sprintf('"Id" =\'%s\' ', $authorId));
 
         return $this->redirect(Routes::GetAuthorsRoute());
     }
