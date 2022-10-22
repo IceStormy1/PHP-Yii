@@ -31,9 +31,8 @@ class Author extends ActiveRecord
     public function rules()
     {
         return [
-            [['Id', 'Name'], 'required'],
-            [['Id', 'Name', 'Birthday', 'Description'], 'string'],
-            [['Id'], 'unique'],
+            [['Name'], 'required'],
+            [['Name', 'Birthday', 'Description'], 'string']
         ];
     }
 

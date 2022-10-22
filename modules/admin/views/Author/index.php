@@ -1,5 +1,6 @@
 <?php
 
+use app\constants\Routes;
 use app\modules\admin\models\Author;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -14,11 +15,11 @@ $this->title = 'Authors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-index">
-
+    <?= Html::a( 'Вернуться к административному модулю', Routes::GetAdminRoute(), ['class' => 'btn btn-outline-primary']); ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Author', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить нового автора', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,18 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'Id',
-            'Name:ntext',
-            'Birthday:ntext',
-            'Description:ntext',
+            ['attribute'=>'Name', 'label' => 'Имя автора', 'format' => 'text'],
+            ['attribute'=>'Birthday', 'label' => 'Дата рождения', 'format' => ['date', 'php:Y-m-d']],
+            ['attribute'=>'Description', 'label' => 'Описание', 'format' => 'text'],
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Author $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'Id' => $model->Id]);
                  }
             ],
         ],
     ]); ?>
-
 
 </div>

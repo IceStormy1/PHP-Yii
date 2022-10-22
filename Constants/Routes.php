@@ -6,6 +6,7 @@ class Routes
 {
     private static string $BaseIndexRoute = '/web/index.php/';
     private static string $BaseLaboratoryRoute = '?r=laboratory/';
+    private static string $BaseAdminRoute = '?r=admin/';
     private static string $BaseSecondLaboratoryRoute = 'second-laboratory-work%2F';
 
     /**
@@ -15,6 +16,42 @@ class Routes
     public static function GetSecondLaboratoryRoute(): string
     {
         return self::GetLaboratoryBaseRoute() . self::$BaseSecondLaboratoryRoute;
+    }
+
+    /**
+     * Return route: /web/index.php/?r=admin/
+     * @return string
+     */
+    public static function GetAdminRoute(): string
+    {
+        return self::$BaseIndexRoute . self::$BaseAdminRoute;
+    }
+
+    /**
+     * Return route: /web/index.php/?r=admin/author
+     * @return string
+     */
+    public static function GetAdminAuthorRoute():string
+    {
+        return self::GetAdminRoute() . 'author';
+    }
+
+    /**
+     * Return route: /web/index.php/?r=admin/author
+     * @return string
+     */
+    public static function GetAdminBooksRoute():string
+    {
+        return self::GetAdminRoute() . 'books';
+    }
+
+    /**
+     * Return route: /web/index.php/?r=admin/genres
+     * @return string
+     */
+    public static function GetAdminGenresRoute():string
+    {
+        return self::GetAdminRoute() . 'genres';
     }
 
     /**
