@@ -3,26 +3,23 @@
 namespace app\modules\admin\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "Authors".
+ * This is the model class for table "Genres".
  *
  * @property string $Id
- * @property string $Name
- * @property string|null $Birthday
- * @property string|null $Description
+ * @property string|null $GenreName
  *
  * @property Books[] $books
  */
-class Author extends ActiveRecord
+class Genres extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'Authors';
+        return 'Genres';
     }
 
     /**
@@ -31,8 +28,7 @@ class Author extends ActiveRecord
     public function rules()
     {
         return [
-            [['Name'], 'required'],
-            [['Name', 'Birthday', 'Description'], 'string']
+            [['GenreName'], 'string']
         ];
     }
 
@@ -43,9 +39,7 @@ class Author extends ActiveRecord
     {
         return [
             'Id' => 'Id',
-            'Name' => 'Имя автора',
-            'Birthday' => 'Дата рождения',
-            'Description' => 'Описание',
+            'GenreName' => 'Жанр',
         ];
     }
 
@@ -56,6 +50,6 @@ class Author extends ActiveRecord
      */
     public function getBooks()
     {
-        return $this->hasMany(Books::class, ['AuthorId' => 'Id']);
+        return $this->hasMany(Books::class, ['GenreId' => 'Id']);
     }
 }
