@@ -40,19 +40,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>',
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'О нас', 'url' => ['/site/about']],
+            ['label' => 'Контакты', 'url' => ['/site/contact']],
+            ['label' => 'Админка', 'url' => ['/admin']],
             '<li class="nav-item">
                <select style="margin-top: 1.5px" class="form-select bg-dark text-white-50 border-0 " onchange="window.location.href = \'http://web-programming-technologies/web/index.php\' + this.options[this.selectedIndex].value">
                     <option class="nav-item" VALUE="">Лабораторные работы</option>
@@ -62,7 +53,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                     <option class="nav-item" VALUE="?r=laboratory/second-laboratory-work">Лабораторная работа №2</option>
                     <option class="nav-item" VALUE="?r=laboratory/third-laboratory-work">Лабораторная работа №3</option>
                </select>
-            </li>'
+            </li>',
+            Yii::$app->user->isGuest
+                ? ['label' => 'Войти', 'url' => ['/site/login']]
+                : '<li class="nav-item">'
+                . Html::beginForm(['/site/logout'])
+                . Html::submitButton(
+                    'Выйти (' . Yii::$app->user->identity->UserName . ')',
+                    ['class' => 'nav-link btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>',
         ]
     ]);
     NavBar::end();
