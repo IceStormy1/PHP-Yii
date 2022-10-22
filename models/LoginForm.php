@@ -61,7 +61,21 @@ class LoginForm extends Model
     {
         $isValid = $this->validate();
 
-        return $isValid && Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        return $isValid && $this->LoginUser();
+    }
+
+    private function LoginUser(): bool
+    {
+        $currentUser = $this->getUser();
+        $duration = $this->rememberMe ? 3600 * 24 * 30 : 0;
+
+        if($this->rememberMe)
+        {
+            $currentUser->generateAuthKey();
+            $currentUser->save();
+        }
+
+        return Yii::$app->user->login($currentUser,  $duration);
     }
 
     /**

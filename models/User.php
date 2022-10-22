@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -57,6 +58,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
         return $this->AuthKey;
+    }
+
+    public function generateAuthKey(): bool
+    {
+        try
+        {
+            $this->AuthKey = Yii::$app->security->generateRandomString();
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     /**
