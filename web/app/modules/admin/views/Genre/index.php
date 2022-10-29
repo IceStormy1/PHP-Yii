@@ -1,26 +1,24 @@
 <?php
 
-use app\constants\Routes;
 use app\modules\admin\models\Genres;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use yii\widgets\LinkPager;
 
 /** @var yii\web\View $this */
 /** @var app\modules\admin\models\GenreSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Таблица жанры';
+$this->title = 'Genres';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="genres-index">
-    <?= Html::a('Вернуться к административному модулю', Routes::GetAdminRoute(), ['class' => 'btn btn-outline-primary']); ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить новый жанр', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Genres', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,24 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'Id',
             'GenreName:ntext',
             [
-                'class' => ActionColumn::class,
+                'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Genres $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'Id' => $model->Id]);
-                }
+                 }
             ],
         ],
     ]); ?>
 
-    <?= LinkPager::widget(
-        [
-            'pagination' => $pagination,
-            'prevPageLabel' => false,
-            'nextPageLabel' => false,
-            'linkOptions' => ['class' => 'page-link'],
-            'linkContainerOptions' => ['class' => 'page-item'],
-            'options' => ['class' => 'pagination pagination-circle pg-blue mb-0']
-        ]
-    ) ?>
+
 </div>

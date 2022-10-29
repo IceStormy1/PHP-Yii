@@ -1,7 +1,7 @@
 <?php
 
 use app\constants\Routes;
-use app\modules\admin\models\Author;
+use app\modules\admin\models\Books;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -9,18 +9,19 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 
 /** @var yii\web\View $this */
-/** @var app\modules\admin\models\AuthorSearch $searchModel */
+/** @var app\modules\admin\models\BooksSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Таблица авторы';
+$this->title = 'Таблица книг';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="author-index">
-    <?= Html::a('Вернуться к административному модулю', Routes::GetAdminRoute(), ['class' => 'btn btn-outline-primary']); ?>
+
+<div class="books-index">
+    <?= Html::a( 'Вернуться к административному модулю', Routes::GetAdminRoute(), ['class' => 'btn btn-outline-primary']); ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить нового автора', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить книгу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,14 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            ['attribute' => 'Name', 'label' => 'Имя автора', 'format' => 'text'],
-            ['attribute' => 'Birthday', 'label' => 'Дата рождения', 'format' => ['date', 'php:Y-m-d']],
-            ['attribute' => 'Description', 'label' => 'Описание', 'format' => 'text'],
+            'BookName:ntext',
+            'GenreId',
+            'AuthorId',
+            'DateOfWriting',
             [
                 'class' => ActionColumn::class,
-                'urlCreator' => function ($action, Author $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Books $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'Id' => $model->Id]);
-                }
+                 }
             ],
         ],
     ]); ?>

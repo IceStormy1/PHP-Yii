@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\Author;
 use app\modules\admin\models\AuthorSearch;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -24,9 +25,21 @@ class AuthorController extends AppAdminController
         $searchModel = new AuthorSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        $pagination = new Pagination(
+            [
+                'defaultPageSize' => 5,
+                'totalCount' => $dataProvider->query->count()
+            ]);
+
+        $dataProvider->query = $dataProvider->query
+            ->orderBy('Name')
+            ->limit($pagination->limit)
+            ->offset($pagination->offset);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'pagination' => $pagination,
         ]);
     }
 

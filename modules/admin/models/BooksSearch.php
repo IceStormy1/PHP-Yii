@@ -4,13 +4,13 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Genres;
+use app\modules\admin\models\Books;
 use yii\data\Pagination;
 
 /**
- * GenreSearch represents the model behind the search form of `app\modules\admin\models\Genres`.
+ * BooksSearch represents the model behind the search form of `app\modules\admin\models\Books`.
  */
-class GenreSearch extends Genres
+class BooksSearch extends Books
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class GenreSearch extends Genres
     public function rules()
     {
         return [
-            [['Id', 'GenreName'], 'safe'],
+            [['Id', 'BookName', 'GenreId', 'AuthorId', 'DateOfWriting'], 'safe'],
         ];
     }
 
@@ -38,9 +38,11 @@ class GenreSearch extends Genres
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
-        $query = Genres::find();
+        $query = Books::find()
+            ->innerJoinWith(Author::$TableName, '"AuthorId" = "Authors"."Id"')
+            ->innerJoinWith(Genres::$TableName, '"GenreId" = "Genres"."Id"');
 
         // add conditions that should always apply here
 
@@ -62,8 +64,14 @@ class GenreSearch extends Genres
         }
 
         // grid filtering conditions
+        $query->andFilterWhere([
+            'DateOfWriting' => $this->DateOfWriting,
+        ]);
+
         $query->andFilterWhere(['ilike', 'Id', $this->Id])
-            ->andFilterWhere(['ilike', 'GenreName', $this->GenreName]);
+            ->andFilterWhere(['ilike', 'BookName', $this->BookName])
+            ->andFilterWhere(['ilike', 'GenreId', $this->GenreId])
+            ->andFilterWhere(['ilike', 'AuthorId', $this->AuthorId]);
 
         return $dataProvider;
     }

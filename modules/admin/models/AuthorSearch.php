@@ -5,6 +5,7 @@ namespace app\modules\admin\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\Author;
+use yii\data\Pagination;
 
 /**
  * AuthorSearch represents the model behind the search form of `app\modules\admin\models\Author`.
@@ -43,8 +44,14 @@ class AuthorSearch extends Author
 
         // add conditions that should always apply here
 
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => new  Pagination(
+                [
+                    'defaultPageSize' => 5,
+                    'totalCount' => $query->count()
+                ])
         ]);
 
         $this->load($params);

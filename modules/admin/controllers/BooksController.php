@@ -2,17 +2,17 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\models\Genres;
-use app\modules\admin\models\GenreSearch;
+use app\modules\admin\models\Books;
+use app\modules\admin\models\BooksSearch;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GenreController implements the CRUD actions for Genres model.
+ * BooksController implements the CRUD actions for Books model.
  */
-class GenreController extends Controller
+class BooksController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,21 +33,19 @@ class GenreController extends Controller
     }
 
     /**
-     * Lists all Genres models.
+     * Lists all Books models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new GenreSearch();
+        $searchModel = new BooksSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         $pagination = new Pagination(
             [
                 'defaultPageSize' => 5,
                 'totalCount' => $dataProvider->query->count()
             ]);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -56,8 +54,8 @@ class GenreController extends Controller
     }
 
     /**
-     * Displays a single Genres model.
-     * @param string $Id Id
+     * Displays a single Books model.
+     * @param string $Id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -69,13 +67,13 @@ class GenreController extends Controller
     }
 
     /**
-     * Creates a new Genres model.
+     * Creates a new Books model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Genres();
+        $model = new Books();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -91,9 +89,9 @@ class GenreController extends Controller
     }
 
     /**
-     * Updates an existing Genres model.
+     * Updates an existing Books model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $Id Id
+     * @param string $Id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -111,9 +109,9 @@ class GenreController extends Controller
     }
 
     /**
-     * Deletes an existing Genres model.
+     * Deletes an existing Books model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $Id Id
+     * @param string $Id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -125,15 +123,15 @@ class GenreController extends Controller
     }
 
     /**
-     * Finds the Genres model based on its primary key value.
+     * Finds the Books model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $Id Id
-     * @return Genres the loaded model
+     * @param string $Id ID
+     * @return Books the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($Id)
     {
-        if (($model = Genres::findOne(['Id' => $Id])) !== null) {
+        if (($model = Books::findOne(['Id' => $Id])) !== null) {
             return $model;
         }
 
