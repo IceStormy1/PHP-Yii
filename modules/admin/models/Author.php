@@ -17,6 +17,8 @@ use yii\db\ActiveRecord;
  */
 class Author extends ActiveRecord
 {
+    public static string $TableName = "author";
+
     /**
      * {@inheritdoc}
      */

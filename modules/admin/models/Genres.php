@@ -14,6 +14,8 @@ use Yii;
  */
 class Genres extends \yii\db\ActiveRecord
 {
+    public static string $TableName = "genre";
+
     /**
      * {@inheritdoc}
      */

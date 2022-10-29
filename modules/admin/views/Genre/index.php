@@ -1,5 +1,6 @@
 <?php
 
+use app\constants\Routes;
 use app\modules\admin\models\Genres;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -14,7 +15,7 @@ $this->title = 'Таблица жанры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="genres-index">
-
+    <?= Html::a( 'Вернуться к административному модулю', Routes::GetAdminRoute(), ['class' => 'btn btn-outline-primary']); ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

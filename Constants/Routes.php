@@ -51,7 +51,7 @@ class Routes
      */
     public static function GetAdminGenresRoute():string
     {
-        return self::GetAdminRoute() . 'genres';
+        return self::GetAdminRoute() . 'genre';
     }
 
     /**

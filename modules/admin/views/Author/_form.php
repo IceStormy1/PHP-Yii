@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <td> <?= $form->field($model, 'Birthday')->input('date', ['data-date-format'=>'YYYY MMMM DD'])->label('Дата рождения автора') ?></td>
     <td> <?= $form->field($model, 'Description')->textarea(['rows'=>'6'])->label('Описание автора') ?></td>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

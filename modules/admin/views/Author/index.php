@@ -11,7 +11,7 @@ use yii\grid\GridView;
 /** @var app\modules\admin\models\AuthorSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Authors';
+$this->title = 'Таблица авторы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-index">

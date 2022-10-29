@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\modules\admin\models\Genres $model */
 
 $this->title = $model->GenreName;
-$this->params['breadcrumbs'][] = ['label' => 'Genres', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Жанры', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
