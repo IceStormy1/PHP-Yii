@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\EntryForm;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -40,9 +41,31 @@ class SiteController extends BaseController
         }
 
         $model->password = '';
+        $registrationModel = new LoginForm();
+
         return $this->render('login', [
             'model' => $model,
+            'registrationModel' => $registrationModel,
         ]);
+    }
+
+    public function actionRegistration()
+    {
+        $model = new LoginForm();
+        $model->load(Yii::$app->request->post());
+
+        $isUserExist = User::find()->where('"UserName" = \'' . $model->username .'\' ')->count() != 0;
+
+        if($isUserExist != 0)
+            return $this->redirect('?r=site%2Flogin');
+
+        $userModel = new User();
+        $userModel["UserName"] = $model->username;
+        $userModel["Password"] = Yii::$app->getSecurity()->generatePasswordHash($model->password);
+
+        $userModel->save();
+
+        $this->actionLogin();
     }
 
     /**

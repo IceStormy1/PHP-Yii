@@ -127,6 +127,15 @@ class Routes
     }
 
     /**
+     * Return route: /web/index.php/?r=laboratory/second-laboratory-work/%2Fdelete-author&authorId
+     * @return string
+     */
+    public static function GetRegistrationRoute(): string
+    {
+        return self::$BaseIndexRoute . '?r=site%2Fregistration';
+    }
+
+    /**
      * Return route: /web/index.php/?r=laboratory/
      * @return string
      */
